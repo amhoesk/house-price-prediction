@@ -95,10 +95,6 @@ The following table explains each feature with its corresponding descriptive sta
 | **date\_end** | The end date of the property's listing. | 100000 | 0 |  |  |  | 2015-10-16 | 2016-08-18 |  | 2019-11-13 |  |
 | **price\_sold** | The final selling price of the property in dollars. | 70731 | 29269 |  |  |  | $0 | $516,197 | $449,900 | $25,888,888 | $560,700 |
 
-## ![][image1]
-
-###### *Fig 1- The location of listings*
-
 ## Duplicate values
 
 43 duplicate values were found among 100k observations.
@@ -112,9 +108,6 @@ Some important features have a significant amount of missing data.
 + `bath_tot` is an important feature and cannot be ignored. Although the missing values could be estimated, considering that there are only three missing values, corresponding rows were removed to save time.  
 + While there are many missing values for `br` and `br_plus` feature, there are no missing values for `br_final` feature. Since `br_final` were calculated based on `br` and `br_plus`, the missing values can be reconstructed.
 
-![][image2]
-
-###### *Fig 2- Distribution of missing values over different features*
 
 ## Removing outliers
 
@@ -128,11 +121,6 @@ Some important features have a significant amount of missing data.
 * Total Garage: Rows with more than 10 were removed.  
 * Garage type has a value named `Underground` that should be renamed to `Undergrnd` value.
 
-| Before removing outliers | After removing outliers |
-| ----- | ----- |
-| ![][image3] | ![][image4] |
-
-###### *Fig 3- Boxplot of features before and after removing outliers*
 
 ## Feature normalization
 
@@ -142,9 +130,6 @@ Numerical features like `bath_tot`, `br_plus`, `topBelowHighschScore`, `topHighs
 
 The following figure shows the histogram of numerical features and their pairwise relationship. For example, there is a strong positive correlation between the `price_sold` and `bath_tot` and `sqft_numerc`.
 
-![][image5]
-
-###### *Fig 4- Pairwise relationship between features*
 
 # Model Selection
 
@@ -169,7 +154,7 @@ The root mean squared error (RMSE) metric shows a significantly higher error com
 
 Across all metrics, XGBoost outperformed Random Forest, demonstrating lower errors and a higher R² value, confirming its superior predictive performance.
 
-| Model |  RMSE(×1000 $) | MAE(×1000 $)  | R²(%) | MSLE |
+| Model |  RMSE(×1000 $) | MAE(×1000 $)  | R²(%) | MSLE |
 | ----- | :---: | :---: | :---: | :---: |
 | **Linear Regression** | 389 | 230 | 60.6 | NA |
 | **Random Forest** | 284 | 105 | 80.6 | 0.038 |
@@ -177,7 +162,7 @@ Across all metrics, XGBoost outperformed Random Forest, demonstrating lower erro
 
 Performance metrics were found to be sensitive to listings prices showing low prediction power for expensive house prices. Limiting the range of listing prices to $200K-2M (\~3.9% of listings are between 2M-10M) improves the model's performance significantly.
 
-| Model |  RMSE(×1000 $) | MAE(×1000 $)  | R²(%) | MSLE |
+| Model |  RMSE(×1000 $) | MAE(×1000 $)  | R²(%) | MSLE |
 | ----- | :---: | :---: | :---: | :---: |
 | **Linear Regression** | 210 | 152 | 64.7 | 0.107 |
 | **Random Forest** | 127 | 74 | 87.8 | 0.029 |
